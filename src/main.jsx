@@ -82,7 +82,6 @@ function AdminPage(){
 }
 
 function NotFound(){return <main className="page-shell empty"><h1>Oops, wrong little corner.</h1><Link to="/">Back home <ArrowRight/></Link></main>}
-function App(){const bag=useCart();return <CartContext.Provider value={bag}><AppShell/><Route path="/" element={<Home/>}/><Route path="/shop" element={<Shop/>}/><Route path="/story" element={<Story/>}/><Route path="/contact" element={<Contact/>}/><Route path="/product/:id" element={<ProductDetail/>}/><Route path="/bag" element={<Bag/>}/><Route path="/admin" element={<AdminPage/>}/><Route path="*" element={<NotFound/>}/></Routes>{!admin&&<Footer/>}</>}
-
-
-function AppShell(){const loc=useLocation();const admin=loc.pathname.startsWith('/admin');return <>{!admin&&<Header/>}<Routes>(<BrowserRouter><App/></BrowserRouter>);
+function App(){const bag=useCart();return <CartContext.Provider value={bag}><AppShell/></CartContext.Provider>}
+function AppShell(){const loc=useLocation();const admin=loc.pathname.startsWith('/admin');return <>{!admin&&<Header/>}<Routes><Route path="/" element={<Home/>}/><Route path="/shop" element={<Shop/>}/><Route path="/story" element={<Story/>}/><Route path="/contact" element={<Contact/>}/><Route path="/product/:id" element={<ProductDetail/>}/><Route path="/bag" element={<Bag/>}/><Route path="/admin" element={<AdminPage/>}/><Route path="*" element={<NotFound/>}/></Routes>{!admin&&<Footer/>}</>}
+createRoot(document.getElementById('root')).render(<BrowserRouter><App/></BrowserRouter>);
