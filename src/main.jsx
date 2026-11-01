@@ -19,7 +19,8 @@ const products = [
 const money = n => '₹' + n.toLocaleString('en-IN');
 
 function useCart(){
- const [cart,setCart] = useState(()=>JSON.parse(localStorage.getItem('bufi-cart')||'[]'));\n useEffect(()=>{const clear=()=>setCart([]);window.addEventListener('bufi-cart-clear',clear);return()=>window.removeEventListener('bufi-cart-clear',clear)},[]);
+ const [cart,setCart] = useState(()=>JSON.parse(localStorage.getItem('bufi-cart')||'[]'));
+ useEffect(()=>{const clear=()=>setCart([]);window.addEventListener('bufi-cart-clear',clear);return()=>window.removeEventListener('bufi-cart-clear',clear)},[]);
  useEffect(()=>localStorage.setItem('bufi-cart',JSON.stringify(cart)),[cart]);
  const add = p => setCart(old=>{const found=old.find(x=>x.id===p.id);return found?old.map(x=>x.id===p.id?{...x,qty:x.qty+1}:x):[...old,{...p,qty:1}]});
  const change=(id,d)=>setCart(old=>old.map(x=>x.id===id?{...x,qty:x.qty+d}:x).filter(x=>x.qty>0));
